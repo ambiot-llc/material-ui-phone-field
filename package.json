@@ -1,0 +1,67 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "@material-ui/core": "^4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "material-ui-phone-field",
+  "author": "ámbiot LLC",
+  "module": "dist/material-ui-phone-field.esm.js",
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/styles": "^4.9.0",
+    "@rollup/plugin-image": "^2.0.4",
+    "@rollup/plugin-virtual": "^2.0.1",
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/react": "^5.3.14",
+    "@types/jest": "^25.1.3",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "babel-loader": "^8.0.6",
+    "clsx": "^1.1.0",
+    "country-telephone-data": "^0.6.0",
+    "husky": "^4.2.3",
+    "i18n-iso-countries": "^4.3.1",
+    "libphonenumber-js": "^1.7.46",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-copy-assets": "^2.0.1",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "ts-loader": "^6.2.1",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}
