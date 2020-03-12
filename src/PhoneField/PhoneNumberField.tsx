@@ -1,30 +1,30 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import { TextField } from '@material-ui/core';
+import React, { ChangeEvent, useCallback } from 'react'
+import { TextField } from '@material-ui/core'
 // import { getCallingCode } from './countries';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { AsYouType, parseDigits, CountryCode } from 'libphonenumber-js';
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+import { AsYouType, parseDigits, CountryCode } from 'libphonenumber-js'
 
 const useStyles = makeStyles(() =>
   createStyles({
     input: {
       lineHeight: '1.5',
-      height: 'auto'
-    }
-  }),
-);
+      height: 'auto',
+    },
+  })
+)
 
 interface PhoneNumberFieldProps {
-  value: string;
-  onChange: (e: string) => void;
-  country: string;
+  value: string
+  onChange: (e: string) => void
+  country: string
   className?: string
 }
 
-function PhoneNumberField ({
+function PhoneNumberField({
   value,
   onChange,
   country,
-  className
+  className,
 }: PhoneNumberFieldProps) {
   // const getInitialParsedValue = () => formattedToPlain(value, country)
 
@@ -32,10 +32,13 @@ function PhoneNumberField ({
   const classes = useStyles()
   const parsedValue = plainToFormatted(value, country)
 
-  const handleChange = useCallback((e: ChangeEvent<{ value: unknown }>) => {
-    // setParsedValue(e.target.value as string)
-    onChange(formattedToPlain(e.target.value as string, country))
-  }, [])
+  const handleChange = useCallback(
+    (e: ChangeEvent<{ value: unknown }>) => {
+      // setParsedValue(e.target.value as string)
+      onChange(formattedToPlain(e.target.value as string, country))
+    },
+    [onChange, country]
+  )
 
   // useEffect(() => {
   //   setParsedValue(getInitialParsedValue())
@@ -58,53 +61,22 @@ function PhoneNumberField ({
   // }, [parsedValue])
 
   return (
-    <TextField 
-      value={parsedValue} 
+    <TextField
+      value={parsedValue}
       onChange={handleChange}
       className={className}
-      size='medium'
-      InputProps={{ 
+      size="medium"
+      InputProps={{
         // startAdornment: <InputAdornment position='start'>{plusCallingCode}</InputAdornment>,
-        classes: { input: classes.input }
+        classes: { input: classes.input },
       }}
     />
-  );
+  )
 }
 
-export default PhoneNumberField;
+export default PhoneNumberField
 
-function formattedToPlain(
-  value: string,
-  country: string
-) {
-	if (!value) {
-		return ''
-  }
-  
-	if (!country) {
-		return value
-  }
-  
-	const asYouType = new AsYouType(country as CountryCode)
-  asYouType.input(value)
-  
-  const phoneNumber = asYouType.getNumber()
-  
-	if (phoneNumber) {
-		if (country) {
-			return parseDigits(phoneNumber.format("NATIONAL", { nationalPrefix: false }))
-    }
-    
-    return value
-  }
-
-  return ''
-}
-
-function plainToFormatted(
-  value: string,
-  country: string
-) {
+function formattedToPlain(value: string, country: string) {
   if (!value) {
     return ''
   }
@@ -120,7 +92,34 @@ function plainToFormatted(
 
   if (phoneNumber) {
     if (country) {
-      return phoneNumber.format("NATIONAL", { nationalPrefix: false })
+      return parseDigits(
+        phoneNumber.format('NATIONAL', { nationalPrefix: false })
+      )
+    }
+
+    return value
+  }
+
+  return ''
+}
+
+function plainToFormatted(value: string, country: string) {
+  if (!value) {
+    return ''
+  }
+
+  if (!country) {
+    return value
+  }
+
+  const asYouType = new AsYouType(country as CountryCode)
+  asYouType.input(value)
+
+  const phoneNumber = asYouType.getNumber()
+
+  if (phoneNumber) {
+    if (country) {
+      return phoneNumber.format('NATIONAL', { nationalPrefix: false })
     }
 
     return value

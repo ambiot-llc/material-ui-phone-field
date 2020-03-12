@@ -3,7 +3,9 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -25,11 +27,11 @@
   },
   "prettier": {
     "printWidth": 80,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@ambiot-llc/material-ui-phone-field",
+  "name": "@ambiot/material-ui-phone-field",
   "author": "ámbiot LLC",
   "module": "dist/material-ui-phone-field.esm.js",
   "devDependencies": {
