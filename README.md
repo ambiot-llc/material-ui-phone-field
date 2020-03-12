@@ -1,15 +1,13 @@
 # Material-UI Phone Field
 
-Simple React phone input field based on [Material-UI](https://material-ui.com/), [`i18n-iso-countries`](https://www.npmjs.com/package/i18n-iso-countries) and [`libphonenumber-js`](https://www.npmjs.com/package/libphonenumber-js).
-
-### Overall look and feel will change in the future. Use at your own risk.
+Simple React phone input field based on [Material-UI](https://material-ui.com/), [`i18n-iso-countries`](https://www.npmjs.com/package/i18n-iso-countries) and [`libphonenumber-js`](https://www.npmjs.com/package/libphonenumber-js). **Overall look and feel will change when we add country flags.**
 
 ## Installation
 
 To install the component run this command:
 
 ```
-npm i -S @ambiot-llc/material-ui-phone-field
+npm i -S @ambiot/material-ui-phone-field
 ```
 
 ## API
@@ -26,8 +24,8 @@ npm i -S @ambiot-llc/material-ui-phone-field
 
 ## To-Do
 
-- [] Correctly expose `registerLocale` method of `i18n-iso-countries` without increasing the bundle size, so user can required languages manually.
-- [] Add country flags to `Select` field from the `flags` folder. See [this TSDX issue](https://github.com/jaredpalmer/tsdx/issues/533) and [this StackOverflow question](https://stackoverflow.com/questions/60560497/how-to-get-static-files-served-dynamically-with-rollup-and-work-along-with-node).
+- [ ] Correctly expose `registerLocale` method of `i18n-iso-countries` without increasing the bundle size, so user can required languages manually.
+- [ ] Add country flags to `Select` field from the `flags` folder. See [this TSDX issue](https://github.com/jaredpalmer/tsdx/issues/533) and [this StackOverflow question](https://stackoverflow.com/questions/60560497/how-to-get-static-files-served-dynamically-with-rollup-and-work-along-with-node).
 
 ## Contributing
 
