@@ -29,7 +29,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "material-ui-phone-field",
+  "name": "@ambiot-llc/material-ui-phone-field",
   "author": "ámbiot LLC",
   "module": "dist/material-ui-phone-field.esm.js",
   "devDependencies": {
