@@ -33,9 +33,9 @@ The package is built using [TSDX](https://github.com/jaredpalmer/tsdx). Refer to
 
 1. Clone the repository: `git clone https://github.com/ambiot-llc/material-ui-phone-field.git`
 2. Get inside the folder: `cd material-ui-phone-field`
-3. Install all the general dependencies: `npm i`
-4. Run TSDX watcher using `npm start`
+3. Install all the general dependencies: `yarn install`
+4. Run TSDX watcher using `yarn start`
 5. Open another terminal and get inside the `example` folder: `cd example`
-6. Install all dependencies needed to launch the example: `npm i`
-7. Run `npm start` to launch the example app
+6. Install all dependencies needed to launch the example: `yarn install`
+7. Run `yarn start` to launch the example app
 8. Library is located in `src`. Edit the code and watch the changes in the browser
