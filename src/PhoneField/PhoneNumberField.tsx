@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
-import { getCallingCode } from './countries';
+import React, { ChangeEvent, useCallback } from 'react';
+import { TextField } from '@material-ui/core';
+// import { getCallingCode } from './countries';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { AsYouType, CountryCode, parseDigits } from 'libphonenumber-js';
+import { AsYouType, parseDigits, CountryCode } from 'libphonenumber-js';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() =>
 
 interface PhoneNumberFieldProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (e: string) => void;
   country: string;
   className?: string
 }
@@ -26,14 +26,15 @@ function PhoneNumberField ({
   country,
   className
 }: PhoneNumberFieldProps) {
-  const getInitialParsedValue = () => parseValue(value, country)
+  // const getInitialParsedValue = () => formattedToPlain(value, country)
 
-  const plusCallingCode = `+${getCallingCode(country)}`
+  // const plusCallingCode = `+${getCallingCode(country)}`
   const classes = useStyles()
-  const [parsedValue, setParsedValue] = useState(value)
+  const parsedValue = plainToFormatted(value, country)
 
   const handleChange = useCallback((e: ChangeEvent<{ value: unknown }>) => {
-    setParsedValue(e.target.value as string)
+    // setParsedValue(e.target.value as string)
+    onChange(formattedToPlain(e.target.value as string, country))
   }, [])
 
   // useEffect(() => {
@@ -63,7 +64,7 @@ function PhoneNumberField ({
       className={className}
       size='medium'
       InputProps={{ 
-        startAdornment: <InputAdornment position='start'>{plusCallingCode}</InputAdornment>,
+        // startAdornment: <InputAdornment position='start'>{plusCallingCode}</InputAdornment>,
         classes: { input: classes.input }
       }}
     />
@@ -72,7 +73,7 @@ function PhoneNumberField ({
 
 export default PhoneNumberField;
 
-function parseValue(
+function formattedToPlain(
   value: string,
   country: string
 ) {
@@ -84,16 +85,44 @@ function parseValue(
 		return value
   }
   
-	const asYouType = new AsYouType(undefined)
+	const asYouType = new AsYouType(country as CountryCode)
   asYouType.input(value)
   
   const phoneNumber = asYouType.getNumber()
   
 	if (phoneNumber) {
 		if (country) {
-			return parseDigits(phoneNumber.formatNational())
+			return parseDigits(phoneNumber.format("NATIONAL", { nationalPrefix: false }))
     }
     
+    return value
+  }
+
+  return ''
+}
+
+function plainToFormatted(
+  value: string,
+  country: string
+) {
+  if (!value) {
+    return ''
+  }
+
+  if (!country) {
+    return value
+  }
+
+  const asYouType = new AsYouType(country as CountryCode)
+  asYouType.input(value)
+
+  const phoneNumber = asYouType.getNumber()
+
+  if (phoneNumber) {
+    if (country) {
+      return phoneNumber.format("NATIONAL", { nationalPrefix: false })
+    }
+
     return value
   }
 

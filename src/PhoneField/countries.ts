@@ -5,8 +5,14 @@ import {
 } from 'libphonenumber-js';
 import isoCountries from 'i18n-iso-countries';
 
-export const getCallingCode: (iso: string) => string = function (iso) {
-  return getCountryCallingCode(iso as CountryCode) as string;
+export const getCallingCode: (iso: string) => string | undefined = function (
+  iso
+) {
+  try {
+    return getCountryCallingCode(iso as CountryCode) as string;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 interface StringMap {
@@ -14,6 +20,7 @@ interface StringMap {
 }
 
 isoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+isoCountries.registerLocale(require('i18n-iso-countries/langs/ru.json'));
 
 function makeCountriesObject () {
   const codes = Object.keys(isoCountries.getAlpha2Codes());
@@ -23,7 +30,9 @@ function makeCountriesObject () {
   for (const code of codes) {
     if (isSupportedCountry(code)) {
       const callingCode = getCallingCode(code);
-      countriesObject[code] = callingCode;
+      if (callingCode) {
+        countriesObject[code] = callingCode;
+      }
     }
   }
 

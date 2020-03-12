@@ -47,15 +47,16 @@ const theme = makeTheme(true)
 
 const App = () => {
   const [value, setValue] = React.useState('')
-  const onChange = (value: string) => {
+  const onChange = React.useCallback((value: string) => {
+    console.log('onChange', value)
     setValue(value)
-  }
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Paper style={{ margin: 16, padding: 16, maxWidth: 500 }}>
-        <PhoneField value={value} onChange={onChange} fullWidth />
+        <PhoneField value={value} onChange={onChange} fullWidth language='ru' />
         <Typography>{value}</Typography>
       </Paper>
     </ThemeProvider>
