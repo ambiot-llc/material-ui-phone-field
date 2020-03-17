@@ -3,9 +3,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -34,6 +32,9 @@
   "name": "@ambiot/material-ui-phone-field",
   "author": "ámbiot LLC",
   "module": "dist/material-ui-phone-field.esm.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@material-ui/core": "^4.9.5",
