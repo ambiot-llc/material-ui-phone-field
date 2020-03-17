@@ -3,14 +3,17 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "install-peers"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.0.0",
@@ -54,6 +57,7 @@
     "@types/react-dom": "^16.9.5",
     "babel-loader": "^8.0.6",
     "husky": "^4.2.3",
+    "install-peers-cli": "^2.2.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-copy-assets": "^2.0.1",
     "rollup-plugin-svg": "^2.0.0",
