@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import CountrySelect from './CountrySelect'
 import { isoCountryCodes, getCallingCode } from './countries'
 import PhoneNumberField from './PhoneNumberField'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +43,15 @@ function returnValue(country: string, phoneValue: string) {
   return `+${callingCode}${phoneValue}`
 }
 
+function getValueCountry(value: string) {
+  if (!value) return ''
+
+  const phoneNumber = parsePhoneNumberFromString(value)
+  if (!phoneNumber) return ''
+
+  return phoneNumber.country || ''
+}
+
 const PhoneField = ({
   value,
   onChange,
@@ -50,7 +60,9 @@ const PhoneField = ({
   language,
 }: PhoneFieldProps) => {
   const classes = useStyles()
-  const [country, setCountry] = useState(defaultCountry || '')
+  const [country, setCountry] = useState(
+    getValueCountry(value) || defaultCountry || ''
+  )
   const [phoneValue, setPhoneValue] = useState('')
 
   const change = useCallback(
@@ -62,21 +74,27 @@ const PhoneField = ({
 
   const handleCountryChange = useCallback(
     (event: ChangeEvent<{ value: unknown }>) => {
-      setCountry(event.target.value as string)
+      const newCountry = event.target.value as string
+      setCountry(newCountry)
+      change(newCountry, phoneValue)
     },
-    []
+    [setCountry, change, phoneValue]
   )
 
   const handleTextChange = useCallback(
     (value: string) => {
       setPhoneValue(value)
+      change(country, value)
     },
-    [setPhoneValue]
+    [setPhoneValue, change, country]
   )
 
   useEffect(() => {
-    change(country, phoneValue)
-  }, [country, phoneValue, change])
+    const newCountry = getValueCountry(value)
+    if (newCountry) {
+      setCountry(newCountry)
+    }
+  }, [value])
 
   return (
     <div className={clsx(classes.root, fullWidth && classes.fullWidth)}>
