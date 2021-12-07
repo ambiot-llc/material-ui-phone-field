@@ -2,7 +2,7 @@ import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import {
-  createMuiTheme,
+  createTheme,
   ThemeProvider,
   CssBaseline,
   Paper,
@@ -21,7 +21,7 @@ function makeTheme(isDark) {
     dark: '#e2ab35',
   }
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: isDark ? 'dark' : 'light',
       primary: orange,
